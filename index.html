@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <!-- Khai báo mã hóa font tiếng Việt chuẩn UTF-8 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cozy Bean - Website Thực Đơn Cà Phê</title>
+
+    <!-- Nhúng Font chữ Tiếng Việt đẹp & chuẩn từ Google Fonts (Merriweather) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Segoe+UI&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Dùng font Segoe UI hoặc Arial cho phần thân bản tin */
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #FAF7F2;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        /* ĐỔI FONT TẠI ĐÂY: Dùng font 'Merriweather' chuẩn tiếng Việt thay cho 'Georgia' */
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', 'Times New Roman', serif;
+            color: #2C1810;
+        }
+
+        h2 + p {
+            margin-top: 5px;
+        }
+
+        /* BANNER & HEADER */
+        .hero-header {
+            background-image: linear-gradient(rgba(20, 10, 5, 0.75), rgba(20, 10, 5, 0.75)), url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1200');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            color: #FFFFFF;
+            padding: 20px 40px 80px 40px;
+            text-align: center;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #FFF;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+
+        .brand-name {
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+        }
+
+        .btn-table {
+            background-color: #C87D53;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .btn-table:hover {
+            background-color: #A66038;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-content .welcome-text {
+            font-style: italic;
+            font-family: 'Merriweather', serif;
+            color: #D4A373;
+            font-size: 1.2rem;
+        }
+
+        .hero-content h1 {
+            color: #FFFFFF;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin: 10px 0;
+        }
+
+        .hero-content .slogan {
+            font-size: 1rem;
+            color: #E0D6CC;
+            font-style: italic;
+        }
+
+        /* NAVIGATION */
+        .main-nav {
+            background-color: #1A0D08;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .main-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .main-nav ul li a {
+            display: block;
+            padding: 15px 25px;
+            color: #D0C5BC;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .main-nav ul li a:hover,
+        .main-nav ul li a.active {
+            color: #FFFFFF;
+            background-color: #2C1810;
+        }
+
+        .main-nav ul li a.active::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 2px;
+            background-color: #C87D53;
+            margin: 4px auto 0 auto;
+        }
+
+        /* MAIN & ASIDE LAYOUT */
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .content-area {
+            flex: 3;
+        }
+
+        .sidebar {
+            flex: 1;
+        }
+
+        .section-title-wrap {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 10px;
+            background-color: #EFE8DE;
+            background-origin: padding-box;
+            background-clip: padding-box;
+            border-radius: 8px;
+        }
+
+        .section-title-wrap .sub-heading {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #C87D53;
+            font-weight: bold;
+        }
+
+        .section-title-wrap h2 {
+            font-size: 2rem;
+        }
+
+        .menu-section {
+            margin-bottom: 50px;
+        }
+
+        .menu-section h2 {
+            font-size: 1.4rem;
+            border-bottom: 2px solid #E5D9CC;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            color: #4A2E2B;
+        }
+
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-menu > article.food-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-menu > article.food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .card-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-body h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .card-body p {
+            font-size: 0.85rem;
+            color: #666666;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #C87D53;
+            font-size: 1rem;
+        }
+
+        .btn-order {
+            background-color: #C87D53;
+            color: #FFFFFF;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.2s ease;
+        }
+
+        .btn-order:hover {
+            background-color: #2C1810;
+        }
+
+        .aside-box {
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+
+        .promo-box {
+            border: 8px solid #C87D53;
+            border-radius: 12px;
+        }
+
+        .aside-tag {
+            background-color: #2C1810;
+            color: #FFF;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+
+        .promo-box h3 {
+            margin: 10px 0 15px 0;
+            font-size: 1.2rem;
+        }
+
+        .hot-list {
+            list-style: none;
+        }
+
+        .hot-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #E5D9CC;
+        }
+
+        .hot-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .hot-list img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .hot-list h4 {
+            font-size: 0.9rem;
+        }
+
+        .hot-list span {
+            font-size: 0.75rem;
+            color: #777;
+            display: block;
+        }
+
+        .site-footer {
+            background-image: linear-gradient(#1A0D08, #110805);
+            color: #D0C5BC;
+            padding: 50px 20px 20px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-col h4 {
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .footer-col small {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: #FFFFFF;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #C87D53;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        @media (max-width: 850px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .main-nav ul {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="hero-header">
+        <div class="top-bar">
+            <a href="#" class="brand">
+                <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=150" alt="Logo The Cozy Bean" class="logo-img">
+                <span class="brand-name">THE COZY BEAN</span>
+            </a>
+            <div class="header-action">
+                <button class="btn-table">Đặt bàn ngay</button>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <span class="welcome-text">Welcome to</span>
+            <h1>THE COZY BEAN</h1>
+            <p class="slogan">Tận hưởng từng phút giây lắng đọng cùng tách cà phê đậm đà</p>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#all" class="active">Tất cả</a></li>
+            <li><a href="#caphe">Cà Phê & Trà</a></li>
+            <li><a href="#banhngot">Bánh Ngọt</a></li>
+            <li><a href="#monhot">Món Hot</a></li>
+            <li><a href="#lienhe">Liên Hệ / Đặt Bàn</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTAINER CHÍNH -->
+    <div class="main-container">
+        
+        <main class="content-area">
+            
+            <div class="section-title-wrap">
+                <span class="sub-heading">THỰC ĐƠN CHỌN LỌC</span>
+                <h2>Khám Phá Hương Vị</h2>
+            </div>
+
+            <!-- SECTION 1: Cà phê -->
+            <section id="caphe" class="menu-section">
+                <h2>Cà Phê Truyền Thống & Pha Máy</h2>
+                <div class="grid-menu">
+                    
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=400" alt="Cà Phê Muối Cozy">
+                        <div class="card-body">
+                            <h3>Cà Phê Muối Cozy</h3>
+                            <p>Đậm đà cà phê phin kết hợp lớp kem muối béo ngậy đặc trưng.</p>
+                            <div class="card-footer">
+                                <span class="price">39.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?q=80&w=400" alt="Bạc Sỉu Espresso">
+                        <div class="card-body">
+                            <h3>Bạc Sỉu Espresso</h3>
+                            <p>Sự kết hợp giữa sữa đặc thơm ngọt và cà phê Espresso nguyên chất.</p>
+                            <div class="card-footer">
+                                <span class="price">35.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=400" alt="Latte Hạt Dẻ Nóng">
+                        <div class="card-body">
+                            <h3>Latte Hạt Dẻ Nóng</h3>
+                            <p>Espresso nhẹ nhàng hòa quyện cùng sữa tươi đánh nóng và hương hạt dẻ.</p>
+                            <div class="card-footer">
+                                <span class="price">45.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=400" alt="Cold Brew Cam Sả">
+                        <div class="card-body">
+                            <h3>Cold Brew Cam Sả</h3>
+                            <p>Cà phê ủ lạnh thanh mát kết hợp vị cam tươi và hương sả thơm nồng.</p>
+                            <div class="card-footer">
+                                <span class="price">48.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=400" alt="Cà Phê Trứng Dừa">
+                        <div class="card-body">
+                            <h3>Cà Phê Trứng Dừa</h3>
+                            <p>Lớp kem trứng béo mịn ngậy mùi dừa tươi trên nền cà phê đậm đà.</p>
+                            <div class="card-footer">
+                                <span class="price">42.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400" alt="Americano Mật Ong">
+                        <div class="card-body">
+                            <h3>Americano Mật Ong</h3>
+                            <p>Cà phê Espresso pha loãng thanh đạm kết hợp chút ngọt dịu của mật ong.</p>
+                            <div class="card-footer">
+                                <span class="price">32.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- SECTION 2: Trà tươi -->
+            <section id="tra" class="menu-section">
+                <h2>Trà Tươi & Macchiato Thanh Nhã</h2>
+                <div class="grid-menu">
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=400" alt="Trà Ô Long Dâu Tằm">
+                        <div class="card-body">
+                            <h3>Trà Ô Long Dâu Tằm</h3>
+                            <p>Trà ô long đậm đà hòa quyện mứt dâu tằm chua ngọt sảng khoái.</p>
+                            <div class="card-footer">
+                                <span class="price">42.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=400" alt="Trà Sơn Macchiato">
+                        <div class="card-body">
+                            <h3>Trà Sơn Macchiato</h3>
+                            <p>Trà đen hảo hạng phủ lớp cream cheese Macchiato béo mặn nhẹ.</p>
+                            <div class="card-footer">
+                                <span class="price">45.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=400" alt="Trà Đào Cam Sả">
+                        <div class="card-body">
+                            <h3>Trà Đào Cam Sả</h3>
+                            <p>Hương vị thanh mát giải nhiệt với miếng đào giòn sần sật.</p>
+                            <div class="card-footer">
+                                <span class="price">38.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Bánh ngọt -->
+            <section id="banhngot" class="menu-section">
+                <h2>Bánh Ngọt & Tráng Miệng Thủ Công</h2>
+                <div class="grid-menu">
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=400" alt="Tiramisu Cacao Ý">
+                        <div class="card-body">
+                            <h3>Tiramisu Cacao Ý</h3>
+                            <p>Bánh mềm mịn, đậm hương vị rum cacao và cà phê espresso chuẩn vị.</p>
+                            <div class="card-footer">
+                                <span class="price">49.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=400" alt="Croissant Bơ Tươi">
+                        <div class="card-body">
+                            <h3>Croissant Bơ Tươi</h3>
+                            <p>Bánh sừng bò nướng nóng hổi, vỏ ngoài giòn xốp nhiều lớp.</p>
+                            <div class="card-footer">
+                                <span class="price">32.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="food-card">
+                        <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=400" alt="Cheesecake Chanh Dây">
+                        <div class="card-body">
+                            <h3>Cheesecake Chanh Dây</h3>
+                            <p>Vị phô mai béo ngậy cân bằng hảo hạng cùng xốt chanh dây chua thanh.</p>
+                            <div class="card-footer">
+                                <span class="price">45.000đ</span>
+                                <button class="btn-order">Đặt món</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+        </main>
+
+        <aside class="sidebar">
+            <div class="aside-box promo-box">
+                <span class="aside-tag">SPECIAL OFFER</span>
+                <h3>Món Hot Trong Tuần</h3>
+                <ul class="hot-list">
+                    <li>
+                        <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=150" alt="Cà Phê Muối Cozy">
+                        <div>
+                            <h4>Cà Phê Muối Cozy</h4>
+                            <span>Cà phê đậm đà đắng nhẹ béo ngậy</span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=150" alt="Tiramisu Cacao Ý">
+                        <div>
+                            <h4>Tiramisu Cacao Ý</h4>
+                            <span>Bánh mềm mịn hương rum thơm nồng</span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=150" alt="Trà Sơn Macchiato">
+                        <div>
+                            <h4>Trà Sơn Macchiato</h4>
+                            <span>Trà thơm cùng lớp váng sữa béo ngậy</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="aside-box discount-box">
+                <h3>Ưu Đãi Đặt Bàn Ưu Tiên</h3>
+                <p>Giảm 15% cho tất cả đơn hàng đặt trước qua website từ 8:00 - 11:00 mỗi ngày.</p>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="lienhe" class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4><i class="icon">🕒</i> GIỜ MỞ CỬA</h4>
+                <p><strong>Thứ 2 - Thứ 6:</strong> 07:00 - 22:30</p>
+                <p><strong>Thứ 7 - Chủ Nhật:</strong> 07:00 - 23:00</p>
+                <small>*Nhận order đến trước giờ đóng cửa 30 phút</small>
+            </div>
+
+            <div class="footer-col">
+                <h4><i class="icon">📍</i> THÔNG TIN LIÊN HỆ</h4>
+                <p>📍 124 Đường Nguyễn Trãi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</p>
+                <p>📞 Hotline đặt bàn: <strong>0908 123 456</strong></p>
+                <p>✉️ Email: contact@thecozybean.vn</p>
+            </div>
+
+            <div class="footer-col">
+                <h4><i class="icon">☕</i> KẾT NỐI VỚI CHÚNG TÔI</h4>
+                <p>Theo dõi The Cozy Bean trên các mạng xã hội để cập nhật menu mới nhất và các ưu đãi hằng tuần!</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Tiktok</a>
+                    <a href="#">Zalo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Copyright © 2025 The Cozy Bean Coffee. All rights reserved. Designed with passion & minimal aesthetics.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
